@@ -1,8 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require "../lib/time"
-require "../lib/key_generator"
-require '../lib/offset_calc'
+require "./lib/time"
+require "./lib/key_generator"
+require './lib/offset_calc'
 
 class Offset_calcTest < Minitest::Test
 

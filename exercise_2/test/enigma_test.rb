@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/enigma'
+require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
   def test_it_has_a_class

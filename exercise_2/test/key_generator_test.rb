@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/key_generator'
+require './lib/key_generator'
 
 class KeyGeneratorTest < Minitest::Test
 
@@ -33,5 +33,5 @@ class KeyGeneratorTest < Minitest::Test
       assert n.rotations[key]
     end
   end
-  
+
 end

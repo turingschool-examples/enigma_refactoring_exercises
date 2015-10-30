@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require '../lib/time'
+require './lib/time'
 
 class TimeTest < Minitest::Test
 
