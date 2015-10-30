@@ -46,3 +46,20 @@ to pull these out into their own objects? Would this improve
 the code?
 
 ### Project 2
+
+This project will be a little more challenging. It has many
+of the same code issues as the first project, but its test
+suite is also not in great shape.
+
+Remember the first rule of Refactor Club: It's not refactoring
+if it's not tested.
+
+For this exercise, join your assigned pair and focus on
+2 things:
+
+1. First, fix up the test suite to get things passing.
+2. Second, look for refactorings to make the code of the
+project cleaner. Keep in mind that as you go, you may need
+to add additional tests around untested code. This step
+is crucial for ensuring you don't change too much as well as
+for cementing your understanding of what the code does.
