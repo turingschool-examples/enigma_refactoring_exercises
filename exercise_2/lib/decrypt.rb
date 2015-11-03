@@ -11,8 +11,8 @@ class Decrypt
     Date.today.strftime("%y%m%d")
   end
 
-  def initialize(key, date = default_date)
-    get_file
+  def initialize(key, date = default_date, input_file_name = "./lib/decrypted.txt")
+    get_file(input_file_name)
     @key = format_the_key(key)
     @date = format_date(date.to_i)
     @formatted_date = formatted_date
@@ -20,8 +20,8 @@ class Decrypt
     @final_key = final_key
   end
 
-  def get_file #from msg.txt
-    incoming_file = File.open(ARGV[0], "r")
+  def get_file(input_file_name)
+    incoming_file = File.open(input_file_name, "r")
     @input = incoming_file.read.chomp
     incoming_file.close
   end

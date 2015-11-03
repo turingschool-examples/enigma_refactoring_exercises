@@ -26,11 +26,6 @@ class EncryptTest < Minitest::Test
     assert_equal "edd", encrypt_runner.encrypt_message("ddd", 41)
   end
 
-  def test_it_can_handle_special_characters
-    encrypt_runner = Encrypt.new
-    assert_equal "ielmpmon", encrypt_runner.encrypt_message("hello !@#$%^&* mom", 41)
-  end
-
   def test_it_can_handle_empty_string
     encrypt_runner = Encrypt.new
     assert_equal "", encrypt_runner.encrypt_message("", 41)

@@ -113,7 +113,7 @@ class CrackTest< Minitest::Test
     crack_runner.set_pairs
     crack_runner.find_rotation_distance
     crack_runner.shift_key_to_ABCD_order
-    result = "Wow You were not supposed to see this"
+    result = "you were..end.."
     assert_equal result, crack_runner.send_to_encrypt_class
 
 
