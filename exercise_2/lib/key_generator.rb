@@ -38,7 +38,3 @@ class KeyGenerator
     rotation_collection.map { |index| index.to_i  }
   end
 end
-
-
-test = KeyGenerator.new
-test.ext_rotation_collector([7, 5, 8, 5, 7])
