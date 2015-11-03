@@ -7,14 +7,25 @@ class Encrypt
   def initialize
     @encrypted_msg = []
     @keymap = "abcdefghijklmnlopqrstuvwxyz0123456789,. ".chars
-  end        # 0123456789012345678901234567890123456789
+  end
 
   def encrypt_message(string, rotation_collection)
-    # string.gsub!(/[^0-9a-z]/, '')                                                    # => "hellomomend"
     index = 0
     string.chars.each do |character|
-      encrypted_msg << encrypt_character(character, rotation_collection[index % 4])
+      case index
+      when 0
+        encrypted_msg << encrypt_character(character, rotation_collection[0])
+      when 1
+        encrypted_msg << encrypt_character(character, rotation_collection[1])
+      when 2
+        encrypted_msg << encrypt_character(character, rotation_collection[2])
+      when 3
+        encrypted_msg << encrypt_character(character, rotation_collection[3])
+      end
       index += 1
+      if index > 3
+        index = 0
+      end
     end
     encrypted_msg.join
   end
@@ -25,12 +36,4 @@ class Encrypt
     keymap[new_encrypted_char]
   end
 
-end
-
-
-if __FILE__==$0
-  test = Encrypt.new
-  test_key = KeyGenerator.new
-  #test.encrypt_message('d2v1l',[-18, -34, -26, -10])
-  test.encrypt_message("8pc1nnl6nh",  [-15, -9, -1, -30])
 end
