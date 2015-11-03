@@ -1,14 +1,20 @@
 require_relative './encrypt'
 require_relative './key_generator'
 require_relative './offset_calc'
+require "date"
+
 class Decrypt
 
   attr_accessor :input, :key, :date, :decrypted_message, :formatted_date, :final_key
 
-  def initialize(key= ARGV[2])
+  def default_date
+    Date.today.strftime("%y%m%d")
+  end
+
+  def initialize(key, date = default_date)
     get_file
-    @key = format_the_key(ARGV[2])
-    @date = format_date(ARGV[3].to_i)
+    @key = format_the_key(key)
+    @date = format_date(date.to_i)
     @formatted_date = formatted_date
     @decrypted_message = decrypted_message
     @final_key = final_key
