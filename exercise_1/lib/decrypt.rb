@@ -12,10 +12,10 @@ class Decrypt
     @key        = key
     @file_io    = FileIO.new
     @calc       = OffsetCalculator.new(key, date)
+    @characters = CharacterMap.new.characters
     # calc.rotations is an array of rotation
     # offsets, e.g. [13, 25, 36, 50]
-    @rotator = Rotator.new(@calc.rotations)
-    @characters = CharacterMap.new.characters
+    @rotator = Rotator.new(@calc.rotations, @characters)
   end
 
   def get_rotations
@@ -47,7 +47,7 @@ class Decrypt
   def decrypt(message)
     i = 0
     decrypted_arr = []
-    message_to_decrypt = message.downcase
+    message_to_decrypt = message.chomp.downcase
     while i < message_to_decrypt.length
       current_character = message_to_decrypt[i]
       if i % 4 == 0 || i == 0
