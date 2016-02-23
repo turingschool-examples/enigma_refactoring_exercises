@@ -45,28 +45,11 @@ class Decrypt
   end
 
   def decrypt(message)
-    i = 0
-    decrypted_arr = []
     message_to_decrypt = message.chomp.downcase # had to chomp in case it has a newline
     message_to_decrypt.chars.map.with_index do |char, i|
       offset_to_use = i % 4
       rotator.rotate(char, offset_to_use, :backward)
     end.join
-    while i < message_to_decrypt.length
-      current_character = message_to_decrypt[i]
-      if i % 4 == 0 || i == 0
-        decrypted_arr << rotator.rotate(current_character, 0, :backward)
-      elsif i % 4 == 1 || i == 1
-        decrypted_arr << rotator.rotate(current_character, 1, :backward)
-      elsif i % 4 == 2 || i == 2
-        decrypted_arr << rotator.rotate(current_character, 2, :backward)
-      elsif i % 4 == 3 || i == 3
-        decrypted_arr << rotator.rotate(current_character, 3, :backward)
-      end
-      i += 1
-      decrypted_input = decrypted_arr.join
-    end
-    decrypted_input
   end
 
   def print_message
