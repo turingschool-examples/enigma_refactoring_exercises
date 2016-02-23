@@ -1,16 +1,20 @@
 require_relative 'offset_calculator'
 require_relative 'file_io'
 require_relative 'character_map'
+require_relative "rotator"
 
 class Decrypt
 
-  attr_reader   :rotations, :file_io, :key, :date, :calc, :characters
+  attr_reader   :rotations, :file_io, :key, :date, :calc, :characters, :rotator
 
   def initialize(key = ARGV[2], date = ARGV[3])
     @date       = date
     @key        = key
     @file_io    = FileIO.new
     @calc       = OffsetCalculator.new(key, date)
+    # calc.rotations is an array of rotation
+    # offsets, e.g. [13, 25, 36, 50]
+    @rotator = Rotator.new(@calc.rotations)
     @characters = CharacterMap.new.characters
   end
 
@@ -45,13 +49,19 @@ class Decrypt
     decrypted_arr = []
     message_to_decrypt = message.downcase
     while i < message_to_decrypt.length
+      current_character = message_to_decrypt[i]
       if i % 4 == 0 || i == 0
-        decrypted_arr << decrypt_letter_a(message_to_decrypt[i])
+        puts "rotating: "
+        puts rotator.rotate(current_character, 0, :backward)
+        decrypted_arr << decrypt_letter_a(current_character)
       elsif i % 4 == 1 || i == 1
+        rotator.rotate(current_character, 1, :backward)
         decrypted_arr << decrypt_letter_b(message_to_decrypt[i])
       elsif i % 4 == 2 || i == 2
+        rotator.rotate(current_character, 2, :backward)
         decrypted_arr << decrypt_letter_c(message_to_decrypt[i])
       elsif i % 4 == 3 || i == 3
+        rotator.rotate(current_character, 3, :backward)
         decrypted_arr << decrypt_letter_d(message_to_decrypt[i])
       end
       i += 1
