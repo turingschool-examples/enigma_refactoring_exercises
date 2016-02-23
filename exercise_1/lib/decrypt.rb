@@ -52,16 +52,12 @@ class Decrypt
       current_character = message_to_decrypt[i]
       if i % 4 == 0 || i == 0
         decrypted_arr << rotator.rotate(current_character, 0, :backward)
-        # decrypted_arr << decrypt_letter_a(current_character)
       elsif i % 4 == 1 || i == 1
-        rotator.rotate(current_character, 1, :backward)
-        decrypted_arr << decrypt_letter_b(message_to_decrypt[i])
+        decrypted_arr << rotator.rotate(current_character, 1, :backward)
       elsif i % 4 == 2 || i == 2
-        rotator.rotate(current_character, 2, :backward)
-        decrypted_arr << decrypt_letter_c(message_to_decrypt[i])
+        decrypted_arr << rotator.rotate(current_character, 2, :backward)
       elsif i % 4 == 3 || i == 3
-        rotator.rotate(current_character, 3, :backward)
-        decrypted_arr << decrypt_letter_d(message_to_decrypt[i])
+        decrypted_arr << rotator.rotate(current_character, 3, :backward)
       end
       i += 1
       decrypted_input = decrypted_arr.join
