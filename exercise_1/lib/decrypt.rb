@@ -47,7 +47,7 @@ class Decrypt
   def decrypt(message)
     i = 0
     decrypted_arr = []
-    message_to_decrypt = message.chomp.downcase
+    message_to_decrypt = message.chomp.downcase # had to chomp in case it has a newline
     while i < message_to_decrypt.length
       current_character = message_to_decrypt[i]
       if i % 4 == 0 || i == 0
