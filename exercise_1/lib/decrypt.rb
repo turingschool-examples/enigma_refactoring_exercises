@@ -51,9 +51,8 @@ class Decrypt
     while i < message_to_decrypt.length
       current_character = message_to_decrypt[i]
       if i % 4 == 0 || i == 0
-        puts "rotating: "
-        puts rotator.rotate(current_character, 0, :backward)
-        decrypted_arr << decrypt_letter_a(current_character)
+        decrypted_arr << rotator.rotate(current_character, 0, :backward)
+        # decrypted_arr << decrypt_letter_a(current_character)
       elsif i % 4 == 1 || i == 1
         rotator.rotate(current_character, 1, :backward)
         decrypted_arr << decrypt_letter_b(message_to_decrypt[i])
