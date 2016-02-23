@@ -1,10 +1,11 @@
 require_relative "offset_calculator"
 require_relative "file_io"
 require_relative "character_map"
+require_relative "rotator"
 
 class Encrypt
 
-  attr_reader   :rotations, :file_io, :key, :date, :calc, :characters
+  attr_reader   :rotations, :file_io, :key, :date, :calc, :characters, :rotator
 
   def initialize(key = nil, date = nil)
     @date    = date
@@ -12,6 +13,9 @@ class Encrypt
     @file_io = FileIO.new
     @calc    = OffsetCalculator.new(key, date)
     @characters = CharacterMap.new.characters
+    # calc.rotations is an array of rotation
+    # offsets, e.g. [13, 25, 36, 50]
+    @rotator = Rotator.new(@calc.rotations, @characters)
   end
 
   def get_rotations
@@ -39,23 +43,10 @@ class Encrypt
   end
 
   def encrypt(message)
-    i = 0
-    encrypted_arr = []
-    message_to_encrypt = message.downcase
-    while i < message_to_encrypt.length
-      if i % 4 == 0 || i == 0
-        encrypted_arr << encrypt_letter_a(message_to_encrypt[i])
-      elsif i % 4 == 1 || i == 1
-        encrypted_arr << encrypt_letter_b(message_to_encrypt[i])
-      elsif i % 4 == 2 || i == 2
-        encrypted_arr << encrypt_letter_c(message_to_encrypt[i])
-      elsif i % 4 == 3 || i == 3
-        encrypted_arr << encrypt_letter_d(message_to_encrypt[i])
-      end
-      i += 1
-      encrypted_input = encrypted_arr.join
-    end
-    encrypted_input
+    message_to_encrypt = message.chomp.downcase
+    message_to_encrypt.chars.map.with_index do |char, i|
+      rotator.rotate(char, i % 4, :forward)
+    end.join
   end
 
   def print_message
