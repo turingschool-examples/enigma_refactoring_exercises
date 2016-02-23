@@ -48,6 +48,10 @@ class Decrypt
     i = 0
     decrypted_arr = []
     message_to_decrypt = message.chomp.downcase # had to chomp in case it has a newline
+    message_to_decrypt.chars.map.with_index do |char, i|
+      offset_to_use = i % 4
+      rotator.rotate(char, offset_to_use, :backward)
+    end.join
     while i < message_to_decrypt.length
       current_character = message_to_decrypt[i]
       if i % 4 == 0 || i == 0
